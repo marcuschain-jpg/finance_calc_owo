@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,15 +29,19 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <nav className="">
-          <ul className="flex flex-row mt-2 ml-1 bg-green-300">
-            <li className="mr-8">About</li>
-            <li className="mr-8">Register</li>
-            <li className="mr-8">Login</li>
+      <body className="min-h-full">
+        <nav className="h-16 bg-green-300 flex items-center">
+          <h1 className="ml-1 mr-8"><Link href='/'>Calc</Link></h1>
+          <ul className="w-full flex flex-row justify-center gap-[2%]">
+            <li className="pr-[2%] border-r-1 border-black"><Link href='/'>Home</Link></li>
+            <li className="pr-[2%] border-r-1 border-black"><Link href='/about'>About</Link></li>
+            <li className="pr-[2%] border-r-1 border-black"><Link href='/howitworks'>How it works</Link></li>
+            <li className=""><Link href='/register'>Register</Link></li>
           </ul>
+          <h1 className="mr-1"><Link href='/login'>Login</Link></h1>
         </nav>
-        {children}</body>
+        {children}
+      </body>
     </html>
   );
 }

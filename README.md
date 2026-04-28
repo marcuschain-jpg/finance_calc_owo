@@ -7,3 +7,7 @@ Frontend: React.Js + Typescript
 Backend: Node.Js + Typescript
 DB: PostgreSQL
 Containerisation: Docker
+
+Init:
+    - Frontend: npm run dev
+    - Backend: npm start
