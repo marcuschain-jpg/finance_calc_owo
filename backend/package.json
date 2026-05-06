@@ -1,11 +1,13 @@
 {
   "scripts": {
     "start": "nodemon index.ts",
-    "devStart": "nodemon index.ts"
+    "devStart": "nodemon index.ts",
+    "dev": "nodemon index.ts"
   },
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

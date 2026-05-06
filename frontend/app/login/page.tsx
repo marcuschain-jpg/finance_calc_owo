@@ -14,8 +14,8 @@ export default function loginPage() {
     let output;
     e.preventDefault();
     try {
-      output = await api.get<testOutput>('/');
-      console.log(`Message from BE: ${output.status}`)
+      output = await api.post<testOutput>('/auth/login');
+      console.log(`Message from BE: ${output.data.message}`)
     }
     catch(error){
       if(error) console.log(`error content: ${error}`);

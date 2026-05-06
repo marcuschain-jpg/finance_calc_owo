@@ -1,0 +1,71 @@
+services:
+  # Backend
+  backend:
+    build: ./backend
+    expose:
+    - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+    ports:
+    - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    env_file:
+    - .env
+    volumes:
+    - ./backend/index.ts:/usr/src/app/index.ts
+    - ./backend/src:/usr/src/app/src
+    command: npm start
+  
+  # Frontend
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    expose:
+    - ${REACT_APP_PORT}
+    environment:
+      REACT_APP_PORT: ${REACT_APP_PORT}
+    ports:
+    - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    env_file:
+    - .env
+    links:
+    - backend
+    volumes:
+    - ./frontend/app:/usr/src/app/app
+    - /usr/src/app/node_modules
+    command: npm run dev
+
+  # Database
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    user: ${POSTGRES_USER}
+    volumes:
+      - db-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    expose:
+      - ${POSTGRES_PORT}
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    env_file:
+    - .env
+
+    # Pgadmin
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    env_file:
+    - .env
+    ports:
+    - '5050:80'
+volumes:
+  db-data:
+
