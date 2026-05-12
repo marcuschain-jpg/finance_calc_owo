@@ -9,6 +9,9 @@ services:
       APP_SERVER_PORT: ${APP_SERVER_PORT}
     ports:
     - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    depends_on:
+      db:
+        condition: service_healthy
     env_file:
     - .env
     volumes:
@@ -27,6 +30,9 @@ services:
       REACT_APP_PORT: ${REACT_APP_PORT}
     ports:
     - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    depends_on:
+      backend:
+        condition: service_started
     env_file:
     - .env
     links:

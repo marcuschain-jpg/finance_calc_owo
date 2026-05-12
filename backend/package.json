@@ -5,6 +5,7 @@
     "dev": "nodemon index.ts"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "pg": "^8.20.0"

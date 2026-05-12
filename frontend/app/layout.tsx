@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
+      <body className="min-h-full relative">
         <nav className="h-16 bg-green-300 flex items-center">
           <h1 className="ml-1 mr-8"><Link href='/'>Calc</Link></h1>
           <ul className="w-full flex flex-row justify-center gap-[2%]">
